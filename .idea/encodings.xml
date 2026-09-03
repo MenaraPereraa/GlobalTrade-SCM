@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/globaltrade-auth/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/globaltrade-auth/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/globaltrade-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/globaltrade-core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/globaltrade-ear/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/globaltrade-ear/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/globaltrade-logs/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/globaltrade-logs/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/globaltrade-rest/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/globaltrade-rest/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/globaltrade-scm/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/globaltrade-scm/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/globaltrade-web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/globaltrade-web/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/globaltrade-web/src/main/webapp/assets" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+  </component>
+</project>
