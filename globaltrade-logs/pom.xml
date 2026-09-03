@@ -15,17 +15,21 @@
     <name>globaltrade-logs</name>
 
     <dependencies>
+        <!-- Jakarta EE API -->
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
             <scope>provided</scope>
         </dependency>
+
+        <!-- Core Module -->
         <dependency>
             <groupId>lk.menara</groupId>
             <artifactId>globaltrade-core</artifactId>
             <version>1.0</version>
         </dependency>
 
+        <!-- Jackson for JSON processing -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>

@@ -33,12 +33,14 @@ public class InventoryBean implements InventoryService {
     private NotificationService notificationService;
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public List<Inventory> findAllInventory() {
         return em.createQuery("SELECT i FROM Inventory i JOIN FETCH i.product JOIN FETCH i.warehouse", Inventory.class)
                 .getResultList();
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public List<Inventory> findInventoryForUser(String username) {
         if (username != null && (username.equalsIgnoreCase("admin") ||
                 username.equalsIgnoreCase("superadmin@menara.lk") ||
@@ -61,13 +63,17 @@ public class InventoryBean implements InventoryService {
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public List<Inventory> findStockAcrossWarehouses(Integer productId) {
+        // Read-only query: Find product availability across all warehouses
+        // SUPPORTS: No locking needed, multiple warehouse managers can query simultaneously
         return em.createQuery("SELECT i FROM Inventory i JOIN FETCH i.warehouse WHERE i.product.productId = :productId", Inventory.class)
                 .setParameter("productId", productId.longValue())
                 .getResultList();
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public Inventory findByProductAndWarehouse(Integer productId, Integer warehouseId) {
         TypedQuery<Inventory> query = em.createQuery(
                 "SELECT i FROM Inventory i JOIN FETCH i.product JOIN FETCH i.warehouse " +
@@ -129,6 +135,10 @@ public class InventoryBean implements InventoryService {
     @Audit
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Inventory dispatchStock(Integer warehouseId, Integer productId, Integer quantity) throws InsufficientStockException {
+        // REQUIRED: Ensures atomicity of stock dispatch
+        // Audit interceptor logs dispatch action independently
+        // Prevents overselling through pessimistic validation
+        
         Inventory inventory = findByProductAndWarehouse(productId, warehouseId);
 
         if (inventory.getQuantityOnHand() < quantity) {
@@ -146,6 +156,9 @@ public class InventoryBean implements InventoryService {
     @Audit
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void transferStock(Integer sourceWarehouseId, Integer targetWarehouseId, Integer productId, Integer quantity) throws InsufficientStockException {
+        // REQUIRED: Ensures atomicity of inter-warehouse transfer
+        // Dispatch from source + receipt at target run as single transaction
+        // Audit logs the complete transfer operation
         transferStock(sourceWarehouseId, targetWarehouseId, productId, quantity, null, null);
     }
 

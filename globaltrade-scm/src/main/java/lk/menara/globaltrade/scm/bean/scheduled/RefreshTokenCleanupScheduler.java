@@ -1,4 +1,4 @@
-package lk.menara.globaltrade.core.schedule;
+package lk.menara.globaltrade.scm.bean.scheduled;
 
 import jakarta.ejb.Schedule;
 import jakarta.ejb.Singleton;
@@ -7,7 +7,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.logging.Logger;
 
 @Singleton
@@ -23,10 +23,10 @@ public class RefreshTokenCleanupScheduler {
     @Schedule(hour = "23", minute = "59", persistent = false)
     @Transactional
     public void scheduleCleanup() {
-        int deleted = em.createNamedQuery("RefreshToken.deleteExpiredToken")
-                .setParameter("now", Instant.now())
+        int deleted = em.createNamedQuery("UserSession.deleteExpiredSessions")
+                .setParameter("now", LocalDateTime.now())
                 .executeUpdate();
 
-        LOGGER.info("Refresh token cleanup : " + deleted + " expired tokens deleted.");
+        LOGGER.info("Expired user sessions cleanup: " + deleted + " sessions deleted.");
     }
 }

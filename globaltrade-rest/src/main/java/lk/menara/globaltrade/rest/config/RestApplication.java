@@ -6,6 +6,7 @@ import jakarta.ws.rs.core.Application;
 import lk.menara.globaltrade.logs.resource.AuditLogResource;
 import lk.menara.globaltrade.rest.controller.FileDownloadResource;
 import lk.menara.globaltrade.rest.controller.admin.AdminUserResource;
+import lk.menara.globaltrade.rest.controller.admin.NFRMetricsResource;
 import lk.menara.globaltrade.rest.controller.coordinator.LogisticsCoordinatorResource;
 import lk.menara.globaltrade.rest.controller.coordinator.OrderResource;
 import lk.menara.globaltrade.rest.controller.coordinator.RFQResource;
@@ -47,6 +48,7 @@ public class RestApplication extends Application {
                 LogisticsCoordinatorResource.class,
                 OrderResource.class,
                 AdminUserResource.class,
+                NFRMetricsResource.class,
                 AuditLogResource.class,
                 RFQResource.class,
                 MultiPartFeature.class,

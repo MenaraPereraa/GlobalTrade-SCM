@@ -13,12 +13,9 @@ import jakarta.ws.rs.core.HttpHeaders;
 import lk.menara.globaltrade.auth.util.JwtUtil;
 
 import java.util.Set;
-import java.util.logging.Logger;
 
 @ApplicationScoped
 public class AuthMechanism implements HttpAuthenticationMechanism {
-
-    private static final Logger LOGGER = Logger.getLogger(AuthMechanism.class.getName());
 
     private static final Set<String> PUBLIC_PATHS = Set.of(
             "/api/auth/login",
@@ -53,24 +50,13 @@ public class AuthMechanism implements HttpAuthenticationMechanism {
                     String username = decodedJWT.getSubject();
                     Set<String> roles = JwtUtil.getRoles(token);
 
-                    LOGGER.info("=== AUTHENTICATION SUCCESS ===");
-                    LOGGER.info("Request URI: " + requestUri);
-                    LOGGER.info("Logged Username: " + username);
-                    LOGGER.info("Assigned Roles: " + roles);
-                    // ------------------------------------
-
                     CredentialValidationResult result = new CredentialValidationResult(username, roles);
 
                     return httpMessageContext.notifyContainerAboutLogin(result);
-                } else {
-                    LOGGER.warning("Invalid JWT Token provided for URI: " + requestUri);
                 }
             } catch (Exception e) {
-                LOGGER.severe("Authentication Error: " + e.getMessage());
                 return httpMessageContext.responseUnauthorized();
             }
-        } else {
-            LOGGER.warning("Authorization header missing or invalid for URI: "  + requestUri);
         }
 
         return httpMessageContext.responseUnauthorized();

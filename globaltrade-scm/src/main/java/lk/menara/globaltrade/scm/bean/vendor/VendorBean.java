@@ -33,7 +33,6 @@ public class VendorBean implements VendorService {
     @PersistenceContext(unitName = "globaltradePU")
     private EntityManager em;
 
-    // F ඩ්‍රයිව් එකේ බාහිර ෆෝල්ඩරය (රීඩෙප්ලෝයි කළත් ෆයිල්ස් මැකී යන්නේ නැත)
     private static final String UPLOAD_DIR = "C:/Users/Lenovo/Desktop/QuotationsFolder/";
 
     @Override

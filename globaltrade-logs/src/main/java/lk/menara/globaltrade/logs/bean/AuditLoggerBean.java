@@ -19,6 +19,7 @@ public class AuditLoggerBean {
         em.persist(log);
     }
 
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public User findUserByUsername(String username) {
         if (username == null || username.equals("anonymous")) {
             return null;

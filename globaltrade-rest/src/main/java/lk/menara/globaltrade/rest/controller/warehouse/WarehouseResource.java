@@ -81,7 +81,6 @@ public class WarehouseResource {
         String username = (principal != null) ? principal.getName() : "System";
 
         try {
-            // Call your backend business logic in WarehouseBean to complete the transfer receipt
             warehouseBean.receiveTransferStock(transferId, targetWarehouseId, productId, quantity, username);
             return Response.ok("Transfer stock successfully received and inventory updated.").build();
         } catch (Exception e) {

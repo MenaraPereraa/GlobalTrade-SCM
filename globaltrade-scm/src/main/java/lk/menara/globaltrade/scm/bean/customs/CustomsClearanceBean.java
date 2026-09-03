@@ -394,12 +394,6 @@ public class CustomsClearanceBean {
         em.flush();
     }
 
-    /**
-     * Business logic only — NOT a REST endpoint. This class has no class-level
-     * @Path, so JAX-RS never scanned it as a resource; any @PUT/@Path methods
-     * that used to live here were dead code. The REST entry point for this
-     * lives in CustomsResource, which injects this bean via @EJB and delegates here.
-     */
     @Audit
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void forwardToMainWarehouse(Long shipmentId) {

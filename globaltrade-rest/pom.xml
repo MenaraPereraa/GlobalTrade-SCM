@@ -22,10 +22,19 @@
         </dependency>
         <dependency>
             <groupId>lk.menara</groupId>
+            <artifactId>globaltrade-scm</artifactId>
+            <version>1.0</version>
+            <type>ejb</type>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>lk.menara</groupId>
             <artifactId>globaltrade-core</artifactId>
             <version>1.0</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>lk.menara</groupId>
             <artifactId>globaltrade-auth</artifactId>
@@ -33,13 +42,8 @@
             <type>ejb</type>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>lk.menara</groupId>
-            <artifactId>globaltrade-scm</artifactId>
-            <version>1.0</version>
-            <type>ejb</type>
-            <scope>provided</scope>
-        </dependency>
+
+
         <dependency>
             <groupId>lk.menara</groupId>
             <artifactId>globaltrade-logs</artifactId>

@@ -1,6 +1,8 @@
 package lk.menara.globaltrade.scm.bean.coordinator;
 
 import jakarta.ejb.Stateless;
+import jakarta.ejb.TransactionAttribute;
+import jakarta.ejb.TransactionAttributeType;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -29,11 +31,13 @@ public class RFQBean implements RFQService {
     private NotificationService notificationService;
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public List<RFQ> getAllRFQs() {
         return em.createQuery("SELECT r FROM RFQ r ORDER BY r.rfqId DESC", RFQ.class).getResultList();
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public List<ReplenishmentRequest> getAllPendingReplenishmentRequests() {
         return em.createQuery(
                         "SELECT r FROM ReplenishmentRequest r " +
@@ -47,7 +51,9 @@ public class RFQBean implements RFQService {
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public RFQ createRFQ(RFQDTO dto) throws Exception {
+        
         if (dto.getProductId() == null || dto.getRequestedQuantity() == null || dto.getUserId() == null) {
             throw new IllegalArgumentException("Product ID, Requested Quantity, and User ID are required.");
         }
@@ -68,10 +74,8 @@ public class RFQBean implements RFQService {
         RFQ rfq = new RFQ();
         rfq.setProduct(product);
 
-        // 1. Qty Logic: 20 හෝ DTO එකෙන් එන අගය
         rfq.setRequestedQuantity(dto.getRequestedQuantity() != null ? dto.getRequestedQuantity() : 20);
 
-        // 2. Expected Date / Target Delivery Date Logic: දින 7කින් ලැබීමට සකස් කිරීම
         if (dto.getTargetDeliveryDate() != null) {
             rfq.setTargetDeliveryDate(dto.getTargetDeliveryDate());
         } else {
@@ -82,7 +86,7 @@ public class RFQBean implements RFQService {
         rfq.setCreatedBy(user);
 
         em.persist(rfq);
-        em.flush(); // මෙතැනදී ජනනය වන rfqId එක ඉන්ප ඉදිරියට සියලු තැන්වලට භාවිතා වේ.
+        em.flush();
 
         if (dto.getReqId() != null) {
             ReplenishmentRequest replenishmentReq = em.find(ReplenishmentRequest.class, dto.getReqId().intValue());
@@ -156,7 +160,6 @@ public class RFQBean implements RFQService {
         RFQ rfq = acceptedResponse.getRfq();
         Long rfqId = rfq.getRfqId();
 
-        // අනෙක් සියලුම bids Auto-Reject කිරීම
         em.createQuery("UPDATE RfqResponse r SET r.status = 'REJECTED' WHERE r.rfq.rfqId = :rfqId AND r.responseId != :responseId")
                 .setParameter("rfqId", rfqId)
                 .setParameter("responseId", responseId)

@@ -140,7 +140,6 @@ async function previewPdfFromEndpoint(pdfPath) {
         return;
     }
 
-    // Fix: Path eke subfolders thibunath anthimata thiyena file name eka witharak clean karaganeema
     const cleanPath = pdfPath.replace(/\\/g, '/');
     const fileName = cleanPath.split('/').pop().trim();
 

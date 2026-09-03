@@ -34,7 +34,7 @@ public class InventoryReorderTimerBean {
 
     @Schedule(hour = "*/1", minute = "0", second = "0", persistent = false)
     public void checkLowStock() {
-        LOGGER.info("--- Running Low Stock Check Timer ---");
+        LOGGER.info("Running Low Stock Check Timer");
         try {
             List<Inventory> lowStock = inventoryService.findLowStockItems();
             if (lowStock == null || lowStock.isEmpty()) {

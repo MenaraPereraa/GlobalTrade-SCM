@@ -7,6 +7,9 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "user_session")
+@NamedQuery(
+        name = "UserSession.deleteExpiredSessions",
+        query = "DELETE FROM UserSession u WHERE u.refreshTokenExpiresAt < :now")
 public class UserSession implements Serializable {
     @Id
     @Column(length = 255)
