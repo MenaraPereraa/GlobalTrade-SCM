@@ -69,21 +69,21 @@ public class CustomerPortalBeanTest {
     void setupTestData() {
         // Create test products
         Product product1 = new Product();
-        product1.setProductName("Industrial Machinery");
+        product1.setName("Industrial Machinery");
+        product1.setSku("SKU-MACHINERY-01");
         product1.setUnitPrice(BigDecimal.valueOf(15000.00));
-        product1.setStockQuantity(100);
         em.persist(product1);
 
         Product product2 = new Product();
-        product2.setProductName("Raw Materials");
+        product2.setName("Raw Materials");
+        product2.setSku("SKU-RAWMAT-01");
         product2.setUnitPrice(BigDecimal.valueOf(500.00));
-        product2.setStockQuantity(500);
         em.persist(product2);
 
         Product product3 = new Product();
-        product3.setProductName("Components");
+        product3.setName("Components");
+        product3.setSku("SKU-COMPONENTS-01");
         product3.setUnitPrice(BigDecimal.valueOf(100.00));
-        product3.setStockQuantity(1000);
         em.persist(product3);
 
         // Create test customer
@@ -120,7 +120,7 @@ public class CustomerPortalBeanTest {
         
         // Verify products exist
         Assertions.assertTrue(
-                catalog.stream().anyMatch(p -> "Industrial Machinery".equals(p.getProductName())),
+                catalog.stream().anyMatch(p -> "Industrial Machinery".equals(p.getName())),
                 "Catalog should contain Industrial Machinery"
         );
     }
@@ -134,7 +134,7 @@ public class CustomerPortalBeanTest {
         List<Product> catalog = customerPortalBean.getAvailableCatalog();
 
         Product machinery = catalog.stream()
-                .filter(p -> "Industrial Machinery".equals(p.getProductName()))
+                .filter(p -> "Industrial Machinery".equals(p.getName()))
                 .findFirst()
                 .orElse(null);
 
@@ -144,10 +144,7 @@ public class CustomerPortalBeanTest {
                 machinery.getUnitPrice(),
                 "Machinery should cost 15000"
         );
-        Assertions.assertTrue(
-                machinery.getStockQuantity() > 0,
-                "Product should have available stock"
-        );
+        Assertions.assertNotNull(machinery.getSku(), "Product should have a SKU assigned");
     }
 
     /**
@@ -157,7 +154,7 @@ public class CustomerPortalBeanTest {
     @DisplayName("Should create sales order successfully")
     void testCreateSalesOrder() {
         Customer customer = em.createQuery("SELECT c FROM Customer c", Customer.class).getSingleResult();
-        Product product = em.createQuery("SELECT p FROM Product p WHERE p.productName = 'Industrial Machinery'", Product.class)
+        Product product = em.createQuery("SELECT p FROM Product p WHERE p.name = 'Industrial Machinery'", Product.class)
                 .getSingleResult();
 
         OrderRequestDTO orderDto = new OrderRequestDTO();
