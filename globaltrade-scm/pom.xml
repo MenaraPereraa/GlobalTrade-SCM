@@ -33,12 +33,12 @@
             <scope>provided</scope>
         </dependency>
 
-
         <dependency>
             <groupId>lk.menara</groupId>
             <artifactId>globaltrade-core</artifactId>
             <version>1.0</version>
         </dependency>
+
         <dependency>
             <groupId>lk.menara</groupId>
             <artifactId>globaltrade-logs</artifactId>
@@ -46,17 +46,56 @@
             <type>ejb</type>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>lk.menara</groupId>
             <artifactId>globaltrade-auth</artifactId>
             <version>1.0</version>
-            <scope>compile</scope>
+            <type>ejb</type>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.pdfbox</groupId>
             <artifactId>pdfbox</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.9.3</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.arquillian.junit5</groupId>
+            <artifactId>arquillian-junit5-container</artifactId>
+            <version>1.7.0.Final</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>ee.omnifish.arquillian</groupId>
+            <artifactId>arquillian-glassfish-server-managed</artifactId>
+            <version>2.1.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.shrinkwrap.resolver</groupId>
+            <artifactId>shrinkwrap-resolver-depchain</artifactId>
+            <version>3.3.0</version>
+            <type>pom</type>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.11.0</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<arquillian xmlns="http://jboss.org/schema/arquillian"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://jboss.org/schema/arquillian http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
+
+    <!-- GlassFish/Payara Managed Container Configuration
+         This container allows Arquillian to manage the server lifecycle.
+         Perfect for integration testing with real Jakarta EE runtime.
+    -->
+    <container default="true" qualifier="glassfish-managed">
+        <configuration>
+            <!-- Path to GlassFish/Payara installation directory
+                 Will be auto-downloaded to this location if not present -->
+            <property name="glassFishHome">target/glassfish</property>
+            <!-- Admin port for GlassFish Domain Admin Server (DAS) -->
+            <property name="adminPort">4848</property>
+            <!-- Domain name (default is 'domain1') -->
+            <property name="domain">domain1</property>
+            <!-- Enable debug mode for troubleshooting (set to true if needed) -->
+            <property name="debug">false</property>
+        </configuration>
+    </container>
+</arquillian>
