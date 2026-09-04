@@ -15,7 +15,7 @@ public class Vendor implements Serializable {
     private Integer vendorId;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "USERID")
     @JsonbTransient
     private User user;
 

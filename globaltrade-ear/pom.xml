@@ -24,7 +24,7 @@
             <groupId>lk.menara</groupId>
             <artifactId>globaltrade-auth</artifactId>
             <version>1.0</version>
-            <type>jar</type> <!-- මෙතැන ejb වෙනුවට jar ලෙස වෙනස් කළ යුතුය -->
+            <type>ejb</type>
         </dependency>
         <dependency>
             <groupId>lk.menara</groupId>
@@ -53,7 +53,7 @@
     </dependencies>
 
     <build>
-        <finalName>globaltrade</finalName>
+        <finalName>${project.name}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -63,7 +63,10 @@
                     <version>10</version>
                     <defaultLibBundleDir>lib</defaultLibBundleDir>
                     <modules>
-
+                        <ejbModule>
+                            <groupId>lk.menara</groupId>
+                            <artifactId>globaltrade-auth</artifactId>
+                        </ejbModule>
                         <ejbModule>
                             <groupId>lk.menara</groupId>
                             <artifactId>globaltrade-scm</artifactId>

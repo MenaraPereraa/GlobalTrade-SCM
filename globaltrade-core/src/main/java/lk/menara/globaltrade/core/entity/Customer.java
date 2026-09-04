@@ -12,7 +12,7 @@ public class Customer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customerid")
-    private Integer customerId;
+    private Long customerId;
 
     @Column(nullable = false, length = 150)
     private String name;
@@ -37,11 +37,11 @@ public class Customer implements Serializable {
         this.createdAt = LocalDateTime.now();
     }
 
-    public Integer getCustomerId() {
+    public Long getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Integer customerId) {
+    public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
 
