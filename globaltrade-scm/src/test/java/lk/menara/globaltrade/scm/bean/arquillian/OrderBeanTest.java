@@ -76,15 +76,15 @@ public class OrderBeanTest {
         Vendor vendor = new Vendor();
         vendor.setVendorName("Premium Supplies Ltd");
         vendor.setContactEmail("contact@premium-supplies.com");
-        vendor.setContactPhone("+1-800-SUPPLIES");
-        vendor.setAddress("123 Commerce Street");
+        vendor.setCategory("Electronics");
+        vendor.setCountryCode("US");
         em.persist(vendor);
 
         // Create test customer
         Customer customer = new Customer();
-        customer.setCustomerName("Global Trade Customer");
+        customer.setName("Global Trade Customer");
         customer.setEmail("customer@globaltrade.com");
-        customer.setContactPhone("+1-555-1234");
+        customer.setPhone("+1-555-1234");
         customer.setAddress("456 Business Ave");
         em.persist(customer);
 

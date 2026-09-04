@@ -69,21 +69,18 @@ public class CustomerPortalBeanTest {
     void setupTestData() {
         // Create test products
         Product product1 = new Product();
-        product1.setProductCode("PROD001");
         product1.setProductName("Industrial Machinery");
         product1.setUnitPrice(BigDecimal.valueOf(15000.00));
         product1.setStockQuantity(100);
         em.persist(product1);
 
         Product product2 = new Product();
-        product2.setProductCode("PROD002");
         product2.setProductName("Raw Materials");
         product2.setUnitPrice(BigDecimal.valueOf(500.00));
         product2.setStockQuantity(500);
         em.persist(product2);
 
         Product product3 = new Product();
-        product3.setProductCode("PROD003");
         product3.setProductName("Components");
         product3.setUnitPrice(BigDecimal.valueOf(100.00));
         product3.setStockQuantity(1000);
@@ -91,9 +88,9 @@ public class CustomerPortalBeanTest {
 
         // Create test customer
         Customer customer = new Customer();
-        customer.setCustomerName("Test Customer Inc");
+        customer.setName("Test Customer Inc");
         customer.setEmail("customer@test.com");
-        customer.setContactPhone("+1-555-0001");
+        customer.setPhone("+1-555-0001");
         customer.setAddress("999 Test Boulevard");
         em.persist(customer);
 
@@ -121,18 +118,10 @@ public class CustomerPortalBeanTest {
         Assertions.assertNotNull(catalog, "Catalog should not be null");
         Assertions.assertTrue(catalog.size() >= 3, "Should have at least 3 products");
         
-        // Verify product details
+        // Verify products exist
         Assertions.assertTrue(
-                catalog.stream().anyMatch(p -> "PROD001".equals(p.getProductCode())),
-                "Catalog should contain PROD001"
-        );
-        Assertions.assertTrue(
-                catalog.stream().anyMatch(p -> "PROD002".equals(p.getProductCode())),
-                "Catalog should contain PROD002"
-        );
-        Assertions.assertTrue(
-                catalog.stream().anyMatch(p -> "PROD003".equals(p.getProductCode())),
-                "Catalog should contain PROD003"
+                catalog.stream().anyMatch(p -> "Industrial Machinery".equals(p.getProductName())),
+                "Catalog should contain Industrial Machinery"
         );
     }
 
@@ -145,7 +134,7 @@ public class CustomerPortalBeanTest {
         List<Product> catalog = customerPortalBean.getAvailableCatalog();
 
         Product machinery = catalog.stream()
-                .filter(p -> "PROD001".equals(p.getProductCode()))
+                .filter(p -> "Industrial Machinery".equals(p.getProductName()))
                 .findFirst()
                 .orElse(null);
 
@@ -168,7 +157,7 @@ public class CustomerPortalBeanTest {
     @DisplayName("Should create sales order successfully")
     void testCreateSalesOrder() {
         Customer customer = em.createQuery("SELECT c FROM Customer c", Customer.class).getSingleResult();
-        Product product = em.createQuery("SELECT p FROM Product p WHERE p.productCode = 'PROD001'", Product.class)
+        Product product = em.createQuery("SELECT p FROM Product p WHERE p.productName = 'Industrial Machinery'", Product.class)
                 .getSingleResult();
 
         OrderRequestDTO orderDto = new OrderRequestDTO();

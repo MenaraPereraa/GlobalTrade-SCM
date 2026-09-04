@@ -79,19 +79,16 @@ public class AdminUserBeanTest {
         // Create Admin role
         Role adminRole = new Role();
         adminRole.setRoleName("Admin");
-        adminRole.setDescription("Administrator with full system access");
         em.persist(adminRole);
 
         // Create User role
         Role userRole = new Role();
         userRole.setRoleName("User");
-        userRole.setDescription("Regular application user");
         em.persist(userRole);
 
         // Create Manager role
         Role managerRole = new Role();
         managerRole.setRoleName("Manager");
-        managerRole.setDescription("Manager with warehouse oversight");
         em.persist(managerRole);
 
         em.flush();
@@ -251,13 +248,15 @@ public class AdminUserBeanTest {
 
         // Create test warehouses
         Warehouse warehouse1 = new Warehouse();
-        warehouse1.setWarehouseCode("WH001");
-        warehouse1.setWarehouseName("Main Warehouse");
+        warehouse1.setName("Main Warehouse");
+        warehouse1.setCountryCode("US");
+        warehouse1.setCapacity(1000);
         em.persist(warehouse1);
 
         Warehouse warehouse2 = new Warehouse();
-        warehouse2.setWarehouseCode("WH002");
-        warehouse2.setWarehouseName("Secondary Warehouse");
+        warehouse2.setName("Secondary Warehouse");
+        warehouse2.setCountryCode("EU");
+        warehouse2.setCapacity(500);
         em.persist(warehouse2);
 
         em.flush();
@@ -306,8 +305,9 @@ public class AdminUserBeanTest {
 
         // Create and assign warehouses
         Warehouse warehouse = new Warehouse();
-        warehouse.setWarehouseCode("WH003");
-        warehouse.setWarehouseName("Distribution Center");
+        warehouse.setName("Distribution Center");
+        warehouse.setCountryCode("US");
+        warehouse.setCapacity(2000);
         em.persist(warehouse);
         em.flush();
 
@@ -317,6 +317,6 @@ public class AdminUserBeanTest {
 
         Assertions.assertNotNull(assignedWarehouses, "Assigned warehouses list should not be null");
         Assertions.assertEquals(1, assignedWarehouses.size(), "Should have 1 assigned warehouse");
-        Assertions.assertEquals("WH003", assignedWarehouses.get(0).getWarehouseCode(), "Warehouse code should match");
+        Assertions.assertEquals("Distribution Center", assignedWarehouses.get(0).getName(), "Warehouse name should match");
     }
 }
