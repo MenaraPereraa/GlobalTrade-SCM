@@ -11,7 +11,7 @@
         <configuration>
             <!-- Path to GlassFish/Payara installation directory
                  Will be auto-downloaded to this location if not present -->
-            <property name="glassFishHome">target/glassfish</property>
+            <property name="glassFishHome">C:/Users/Lenovo/Downloads/glassfish-7.0.21/glassfish7</property>
             <!-- Admin port for GlassFish Domain Admin Server (DAS) -->
             <property name="adminPort">4848</property>
             <!-- Domain name (default is 'domain1') -->

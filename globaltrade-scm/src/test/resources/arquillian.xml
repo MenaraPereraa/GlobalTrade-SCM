@@ -7,7 +7,7 @@
     <container default="true" qualifier="glassfish-managed">
         <configuration>
             <!-- Path to GlassFish/Payara installation directory -->
-            <property name="glassFishHome">target/glassfish</property>
+            <property name="glassFishHome">C:/Users/Lenovo/Downloads/glassfish-7.0.21/glassfish7</property>
             <!-- Admin port for GlassFish domain -->
             <property name="adminPort">4848</property>
             <!-- Domain name (default: domain1) -->
