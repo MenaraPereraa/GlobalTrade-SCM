@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Global Trade System - Web UI",
   "scripts": {
-    "build:css": "tailwindcss -i ./src/main/webapp/assets/css/tailwind.input.css -o ./src/main/webapp/assets/css/tailwind.css --minify"
+    "build:css": "tailwindcss -i ./src/main/webapp/assets/css/tailwind.input.css -o ./src/main/webapp/assets/css/output.css --minify"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.1",
